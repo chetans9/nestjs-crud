@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Order } from 'src/orders/order.entity';
 import { Repository } from 'typeorm';
 import { Customer } from './customer.entity';
 import { CustomersRepository } from './customers.repository';
@@ -66,6 +67,35 @@ export class CustomersService {
             throw new NotFoundException(`Customer with id ${id} Not foud`);
 
         }
+
+    }
+    async customerOrders() : Promise<Customer>{
+
+
+
+        const found = await this.customersRepository.findOne({
+             where : {
+                id : 1,
+                orders : {
+                    status : 'active'
+                }
+            },
+            relations: {
+                orders: true,
+            },
+        });
+        return found;
+
+
+    }
+    async customerOrdersJoin(){
+
+        
+    // return await this.customersRepository.createQueryBuilder('customers')
+    // .innerJoin('Order', 'o','customers.id = o.customerId').getMany();
+
+    return await this.customersRepository.createQueryBuilder('customers')
+     .innerJoinAndSelect('Order', 'o','customers.id = o.customerId').getMany();
 
     }
 }

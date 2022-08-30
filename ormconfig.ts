@@ -9,7 +9,7 @@ const ORMConfig : PostgresConnectionOptions = {
     password: 'user1_password',
     database: 'customers_crud',
     synchronize: false,
-    entities : ['./src/customers/*.entity.ts'],
+    entities : ['./src/**/*.entity.ts'],
     migrations: ['./src/database/migrations/*.ts'],
     
     // cli: {

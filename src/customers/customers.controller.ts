@@ -18,6 +18,18 @@ export class CustomersController {
         return this.customersService.getCustomers();
 
     }
+
+    @Get('orders')
+    customerOrders() : Promise<Customer>{
+        return this.customersService.customerOrders();
+
+    }
+
+    @Get('ordersjoin')
+    customerOrdersJoin(){
+        return this.customersService.customerOrdersJoin();
+
+    }
     /**
      * 
      * @param params 
@@ -42,6 +54,8 @@ export class CustomersController {
 
 
     }
+
+
     /**
      * 
      * @param id 

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Order } from "../orders/order.entity";
 
 @Entity()
 export class Customer{
@@ -28,6 +29,8 @@ export class Customer{
 
     @Column({nullable : true})
     gender : string;
+
+    @OneToMany(type => Order, order => order.customer) orders: Order[];  
 
 
 

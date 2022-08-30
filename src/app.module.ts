@@ -5,6 +5,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CustomersModule } from './customers/customers.module';
 import { ConfigModule } from '@nestjs/config';
 import { Customer } from './customers/customer.entity';
+import { Order } from './orders/order.entity';
+import { OrdersModule } from './orders/orders.module';
 
 
 @Module({
@@ -20,12 +22,13 @@ import { Customer } from './customers/customer.entity';
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
       autoLoadEntities : true,
-      entities : [Customer],
+      entities : [Customer, Order],
       synchronize : false,
       migrations : ['database/migrations'],
       migrationsTableName : 'migrations'
 
-    })
+    }),
+    OrdersModule
   
   ],
   controllers: [AppController],
